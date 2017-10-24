@@ -42,8 +42,8 @@ cx = msg.P[2]
 cy = msg.P[6]
 
 def main():
-    useHSV   = False
-    useDepth = False
+    useHSV   = True
+    useDepth = True
     if not useHSV:
         # Task 1
         # subscribe to image
@@ -116,17 +116,21 @@ def HSVObjectDetection(cv_image, toPrint = True):
     # convert image to HSV color space
      # convert image to HSV color space
     # hsv_image = ??
+    #hsv_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2HSV)
     
     # define range of red color in HSV
     # lower_red = ??
     # upper_red = ??
-
+    #lower_red = np.array([170,50,50])
+    #upper_red = np.array([180,255,255])
     # Threshold the HSV image to get only red colors
     # mask = ??
-    
+    #mask = cv2.inRange(hsv_image, lower_red, upper_red)
     # mask_eroded         = ??
     # mask_eroded_dilated = ??
     # convert image to HSV color space
+    #mask_eroded = cv2.erode(mask, None, iterations = 3)
+    #mask_eroded_dilated = cv2.dilate(mask_eroded, None, iterations = 10)
     hsv_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2HSV)
     
     # define range of red color in HSV
@@ -189,6 +193,9 @@ def getXYZ(xp, yp, zc, fx,fy,cx,cy):
     # x = ??
     # y = ??
     # z = ??
+    x = zc
+    y = -1.0*zc*(xp/fx-cx/fx)
+    z = -1.0*zc*(yp/fy-cy/fy)
     return (x,y,z)
 
 
